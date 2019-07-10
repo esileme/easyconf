@@ -31,6 +31,7 @@
 									<th>环境</th>
 									<th>版本号</th>
 									<th>最后修改时间</th>
+									<th>客户端集成url</th>
 									<th>操作</th>
 								</tr>
 							</thead>
@@ -43,6 +44,18 @@
 									<td><a href="javascript:void(0)" onclick="openEditConfig($[id])">$[version]</a></td>
 									<td>$[lastModifyTime]</td>
 									<td>
+										<span>
+											<cif test="'$[secret]'!=''">
+												<a target="_blank" href="/config/getConfig.properties/$[projectName]/$[envName]/$[version]/$[secret]/.properties" >查看</a>
+											</cif>
+										</span>
+										<span>
+											<cif test="'$[secret]'==''">
+												<a target="_blank" href="/config/getConfig.properties/$[projectName]/$[envName]/$[version]/.properties" >查看</a>
+											</cif>
+										</span>
+									</td>
+									<td>
 										<a href="/config/editContent?id=$[id]"  target="_blank">编辑</a>
 										<a href="javascript:void(0)" onclick="openBackupConfig($[id])">备份</a>
 										<a href="javascript:void(0)" onclick="openConfigHistory($[id])">历史版本</a>
@@ -51,7 +64,6 @@
 												<a href="javascript:void(0)" onclick="deleteConfig($[id])">删除</a>
 											</cif>
 										</span>
-										
 									</td>
 								</tr>
 							</tbody>

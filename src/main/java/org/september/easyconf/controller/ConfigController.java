@@ -53,7 +53,7 @@ public class ConfigController {
 
 	@ResponseBody
 	@RequestMapping(value = "listConfigData")
-	public ResponseVo<Page<Config>> listTaskData(Page<Config> page, String projectName , String envName) {
+	public ResponseVo<Page<Config>> listConfigData(Page<Config> page, String projectName , String envName) {
 		SmartParamMap pm = new SmartParamMap();
 		pm.put("projectName", projectName);
 		pm.put("envName", envName);
@@ -166,13 +166,13 @@ public class ConfigController {
 	
 	@PublicMethod
 	@ResponseBody
-	@RequestMapping(value = "/getConfig*/{project}/{env}/{version}")
+	@RequestMapping(value = "/getConfig*/{project}/{env}/{version}/*")
 	public String getConfig2(@PathVariable String project , @PathVariable String env , @PathVariable String version) throws Exception {
 		return getConfig(project , env , version , "");
 	}
 	@PublicMethod
 	@ResponseBody
-	@RequestMapping(value = "/getConfig*/{project}/{env}/{version}/{secret}")
+	@RequestMapping(value = "/getConfig*/{project}/{env}/{version}/{secret}/*")
 	public String getConfig(@PathVariable String project , @PathVariable String env , @PathVariable String version 
 			, @PathVariable String secret) throws Exception {
 		if(StringUtils.isEmpty(project)) {
@@ -210,7 +210,7 @@ public class ConfigController {
 			}
 			//机密型
 			if(!StringUtils.equals(secret, envType.getSecret())) {
-				throw new BusinessException("secret not correct, please check again");
+				throw new BusinessException("secret not correct, please check again , do not contains #%? ");
 			}
 		}
 		
